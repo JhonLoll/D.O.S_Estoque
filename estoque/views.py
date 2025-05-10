@@ -4,6 +4,6 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-# estoque\urls.py
+# estoque\urls.py - index.html
 def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, 'index.html')
