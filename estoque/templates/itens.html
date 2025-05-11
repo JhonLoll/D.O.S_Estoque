@@ -30,7 +30,7 @@
                         <td>{{ item.quantidade}}</td>
                         <td>
                           <a href="/api/estoque/saidaItem/{{item.id}}" class="btn btn-secondary">Saída</a>
-                          <a href="#" class="btn btn-danger">Entrada</a>
+                          <a href="/api/estoque/entradaItem/{{item.id}}" class="btn btn-danger">Entrada</a>
                         </td>
                     <tr>
                 {% endfor %}

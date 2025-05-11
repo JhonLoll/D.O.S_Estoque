@@ -15,20 +15,27 @@ def listarItens(request):
 
     return render(request,  "itens.html", {"itens":itens})
 
-def saidaItens(request, id):   
+def saidaItem(request, id):   
 
         item = Item.objects.get(id=id)
         if request.method == 'POST':
-            quantidade_retirada = int(request.POST.get('quantidade'))
-            item.quantidade -= quantidade_retirada
+            quantidade_out = int(request.POST.get('quantidade'))
+            item.quantidade -= quantidade_out
             item.save()
             return HttpResponseRedirect('/api/estoque/itens')
 
         return render(request, 'saidaItem.html', {'item': item})
 
 
-def entradaItem(request):
-    return
+def entradaItem(request, id):
+        item = Item.objects.get(id=id)
+        if request.method == 'POST':
+            quantidade_add = int(request.POST.get('quantidade'))
+            item.quantidade += quantidade_add
+            item.save()
+            return HttpResponseRedirect('/api/estoque/itens')
+
+        return render(request, 'entradaItem.html', {'item': item})
 
 def cadastroItem(request):
     return
