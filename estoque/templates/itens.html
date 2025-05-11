@@ -10,12 +10,17 @@
 </head>
 <body>
     {% include "components/navbar.html" %}
-
     <div class="container">
-
-        <h1 class="text-center mt-3">Home</h1>
-
         <table>    
+        <thead>
+            <thead>
+              <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Unidade de Medida</th>
+                <th scope="col">Quantidade</th>
+              </tr>
+            </thead>
             <tbody>
                 {% for item in itens %}
                     <tr>
@@ -23,10 +28,10 @@
                         <td>{{ item.marca}}</td>
                         <td>{{ item.unid_medida}}</td>
                         <td>{{ item.quantidade}}</td>
-                        <!--<td>
-                          <a href="/tarefas/editarAtividade/{{tarefa.id}}" class="btn btn-secondary">Editar</a>
-                          <a href="/tarefas/excluirAtividade/{{tarefa.id}}" class="btn btn-danger">Excluir</a>
-                        </td>-->
+                        <td>
+                          <a href="/api/estoque/saidaItem/{{item.id}}" class="btn btn-secondary">Saída</a>
+                          <a href="#" class="btn btn-danger">Entrada</a>
+                        </td>
                     <tr>
                 {% endfor %}
             </tbody>

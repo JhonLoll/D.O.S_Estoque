@@ -6,4 +6,5 @@ from estoque.views import index
 urlpatterns = [
     path('', index, name='index'),
     path('itens', views.listarItens),
+    path('saidaItem/<int:id>', views.saidaItens),
 ]
