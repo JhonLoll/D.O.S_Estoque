@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
-    {% comment %} Boostrap CSS {% endcomment %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <title>{% if estoque %}Editar Item no Estoque{% else %}Novo Item no Estoque{% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    {% include "components/navbar.html" %}
-    <div class="container">
-      <form method="POST", action="novoEstoque">
-      {% csrf_token %} 
-      <label for="item">Item
-      <select name="item">
-          {% for item in itens %}
-              <option value="{{item.id}}">{{item.nome}}</option>
-          {%endfor%}
-      </select></label><br>
-      <label for="quantidade">Quantidade
-      <input type="text" name="quantidade" id="quantidade">
-      </label><br>
-      <label for="endereco">Endereço
-      <input type="text" name="endereco" id="endereco">
-      </label><br>
-      <input type="submit" value="salvar">
-      </form>
+    <div class="container mt-4">
+        <h1>{% if estoque %}Editar Item no Estoque{% else %}Novo Item no Estoque{% endif %}</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="item" class="form-label">Item:</label>
+                <select class="form-select" id="item" name="item" required>
+                    <option value="">Selecione um item</option>
+                    {% for item in itens %}
+                        <option value="{{ item.id }}" {% if estoque and estoque.item.id == item.id %}selected{% endif %}>
+                            {{ item.nome }} - {{ item.marca }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade:</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" 
+                       value="{% if estoque %}{{ estoque.quantidade }}{% endif %}" min="0" required>
+            </div>
+            <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço:</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" 
+                       value="{% if estoque %}{{ estoque.endereco }}{% endif %}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">{% if estoque %}Atualizar{% else %}Cadastrar{% endif %}</button>
+            <a href="/api/estoque/itens" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
-    {% comment %} Boostrap JS {% endcomment %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

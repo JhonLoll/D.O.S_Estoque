@@ -1,27 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
-    {% comment %} Boostrap CSS {% endcomment %}
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <title>Saída de Item</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    {% include "components/navbar.html" %}
-    <div class="saida-item">
-        <h1>{{ estoque.item.nome }} - {{ estoque.item.marca }}</h1>
-
-        <form method="post">
+    <div class="container mt-4">
+        <h1>Registrar Saída de Item</h1>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ estoque.item.nome }}</h5>
+                <p class="card-text">{{ estoque.item.descricao }}</p>
+                <p class="card-text">Quantidade atual: {{ estoque.quantidade }}</p>
+                <p class="card-text">Endereço: {{ estoque.endereco }}</p>
+            </div>
+        </div>
+        
+        <form method="POST">
             {% csrf_token %}
-            <label for="quantidade">Quantidade a retirar:</label><br>
-            <input type="number" id="quantidade" name="quantidade" min="1" required><br>
-            <button type="submit">Retirar</button>
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">Quantidade para saída:</label>
+                <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" max="{{ estoque.quantidade }}" required>
+            </div>
+            <button type="submit" class="btn btn-warning">Registrar Saída</button>
+            <a href="/api/estoque/itens" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
-    
-    {% comment %} Boostrap JS {% endcomment %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

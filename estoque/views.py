@@ -76,3 +76,21 @@ def excluirEstoque(request,id):
     estoque = Estoque.objects.get(id=id)
     estoque.delete()
     return HttpResponseRedirect('/api/estoque/itens')
+
+def listarCadastrarItem(request):
+    if request.method == "POST":
+        nome = request.POST.get('nome')
+        marca = request.POST.get('marca')
+        unid_medida = request.POST.get('unid_medida')
+        
+        novo_item = Item(nome=nome, marca=marca, unid_medida=unid_medida)
+        novo_item.save()
+        return HttpResponseRedirect('/api/estoque/gerenciar-itens')
+    
+    itens = Item.objects.all()
+    return render(request, "gerenciar_itens.html", {"itens": itens})
+
+def excluirItem(request, id):
+    item = Item.objects.get(id=id)
+    item.delete()
+    return HttpResponseRedirect('/api/estoque/gerenciar-itens')
