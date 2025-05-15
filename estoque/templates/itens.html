@@ -17,21 +17,21 @@
                 <tr>
                   <th scope="col">Nome</th>
                   <th scope="col">Marca</th>
-                  <th scope="col">Unidade de Medida</th>
+                  <th scope="col">Endereco</th>
                   <th scope="col">Quantidade</th>
                   <th scope="col">Ações</th>
                 </tr>
               </thead>
               <tbody>
-                  {% for item in itens %}
+                  {% for estoque in estoque %}
                       <tr>
-                          <td>{{ item.nome }}</td>
-                          <td>{{ item.marca}}</td>
-                          <td>{{ item.unid_medida}}</td>
-                          <td>{{ item.quantidade}}</td>
+                          <td>{{ estoque.item.nome }}</td>
+                          <td>{{ estoque.item.marca}}</td>
+                          <td>{{ estoque.endereco}}</td>
+                          <td>{{ estoque.quantidade}}</td>
                           <td>
-                            <a href="/api/estoque/saidaItem/{{item.id}}" class="btn btn-primary btn-sm">Saída</a>
-                            <a href="/api/estoque/entradaItem/{{item.id}}" class="btn btn-success btn-sm">Entrada</a>
+                            <a href="/api/estoque/saidaItem/{{estoque.id}}" class="btn btn-primary btn-sm">Saída</a>
+                            <a href="/api/estoque/entradaItem/{{estoque.id}}" class="btn btn-success btn-sm">Entrada</a>
                           </td>
                       <tr>
                   {% endfor %}

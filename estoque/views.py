@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .models import Item
+from .models import Item, Estoque
 
 # Create your views here.
 
@@ -11,37 +11,68 @@ def index(request):
 
 def listarItens(request):
 
-    itens = Item.objects.all()
+    estoque = Estoque.objects.all()
 
-    return render(request,  "itens.html", {"itens":itens})
+    return render(request,  "itens.html", {"estoque":estoque})
 
 def saidaItem(request, id):   
 
-        item = Item.objects.get(id=id)
+        estoque = Estoque.objects.get(id=id)
         if request.method == 'POST':
             quantidade_out = int(request.POST.get('quantidade'))
-            item.quantidade -= quantidade_out
-            item.save()
+            estoque.quantidade -= quantidade_out
+            estoque.save()
             return HttpResponseRedirect('/api/estoque/itens')
 
-        return render(request, 'saidaItem.html', {'item': item})
+        return render(request, 'saidaItem.html', {'estoque': estoque})
 
 
 def entradaItem(request, id):
-        item = Item.objects.get(id=id)
+        estoque = Estoque.objects.get(id=id)
         if request.method == 'POST':
             quantidade_add = int(request.POST.get('quantidade'))
-            item.quantidade += quantidade_add
-            item.save()
+            estoque.quantidade += quantidade_add
+            estoque.save()
             return HttpResponseRedirect('/api/estoque/itens')
 
-        return render(request, 'entradaItem.html', {'item': item})
+        return render(request, 'entradaItem.html', {'estoque': estoque})
 
-def cadastroItem(request):
-    return
+def novoEstoque(request):
+    if(request.method == "POST"):
+         quantidade = request.POST.get('quantidade')
+         endereco = request.POST.get('endereco')
+         item = Item.objects.get(id=request.POST.get('item'))
 
-def editarItem(request):
-    return
+         novo_estoque = Estoque(quantidade = quantidade,
+                                endereco = endereco,
+                                item = item)
+         novo_estoque.save()
+         return HttpResponseRedirect('/api/estoque/itens')
+    
+    itens = Item.objects.all()
+    return render(request,"novoEstoque.html",{'itens':itens})
 
-def excluirItem(request):
-    return
+def editarEstoque(request, id):
+    if request.method == "POST":
+        quantidade = request.POST.get('quantidade')
+        endereco = request.POST.get('endereco')
+        item = Item.objects.get(id=request.POST.get('item'))
+
+        editar_estoque = Estoque.objects.get(id=id)
+        editar_estoque.quantidade = quantidade
+        editar_estoque.endereco = endereco
+        editar_estoque.item = item
+        editar_estoque.save()
+
+        return HttpResponseRedirect('/api/estoque/itens')
+    else:
+        estoque = Estoque.objects.get(id=id)
+        itens = Item.objects.all()
+
+    return render(request,"novoEstoque.html",{'estoque' : estoque, 'itens' : itens})
+
+
+def excluirEstoque(request,id):
+    estoque = Estoque.objects.get(id=id)
+    estoque.delete()
+    return HttpResponseRedirect('/api/estoque/itens')

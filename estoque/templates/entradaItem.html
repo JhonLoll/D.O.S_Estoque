@@ -11,7 +11,7 @@
 <body>
     {% include "components/navbar.html" %}
     <div class="entrada-item">
-        <h1>{{ item.nome }} - {{ item.marca }}</h1>
+        <h1>{{ estoque.item.nome }} - {{ estoque.item.marca }}</h1>
 
         <form method="post">
             {% csrf_token %}

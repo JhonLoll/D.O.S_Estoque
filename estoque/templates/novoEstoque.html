@@ -10,17 +10,24 @@
 </head>
 <body>
     {% include "components/navbar.html" %}
-    <div class="saida-item">
-        <h1>{{ estoque.item.nome }} - {{ estoque.item.marca }}</h1>
-
-        <form method="post">
-            {% csrf_token %}
-            <label for="quantidade">Quantidade a retirar:</label><br>
-            <input type="number" id="quantidade" name="quantidade" min="1" required><br>
-            <button type="submit">Retirar</button>
-        </form>
+    <div class="container">
+      <form method="POST", action="novoEstoque">
+      {% csrf_token %} 
+      <label for="item">Item
+      <select name="item">
+          {% for item in itens %}
+              <option value="{{item.id}}">{{item.nome}}</option>
+          {%endfor%}
+      </select></label><br>
+      <label for="quantidade">Quantidade
+      <input type="text" name="quantidade" id="quantidade">
+      </label><br>
+      <label for="endereco">Endereço
+      <input type="text" name="endereco" id="endereco">
+      </label><br>
+      <input type="submit" value="salvar">
+      </form>
     </div>
-    
     {% comment %} Boostrap JS {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
