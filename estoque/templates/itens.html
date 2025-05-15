@@ -7,18 +7,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/api/estoque/">Sistema de Estoque</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/estoque/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/api/estoque/itens">Estoque</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/estoque/gerenciar-itens">Gerenciar Itens</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="container mt-4">
         <h1>Itens em Estoque</h1>
-        <a href="/api/estoque/" class="btn btn-secondary mb-3">Voltar</a>
         <a href="/api/estoque/novoEstoque" class="btn btn-primary mb-3">Novo Item</a>
         
-        <table class="table table-striped">
-            <thead>
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
                 <tr>
                     <th>ID</th>
                     <th>Item</th>
                     <th>Marca</th>
-                    <th>Un. Medida</th>
+                    <th>Unidade</th>
                     <th>Quantidade</th>
                     <th>Endereço</th>
                     <th>Ações</th>
@@ -36,13 +57,13 @@
                     <td>
                         <a href="/api/estoque/entradaitem/{{ item.id }}" class="btn btn-success btn-sm">Entrada</a>
                         <a href="/api/estoque/saidaitem/{{ item.id }}" class="btn btn-warning btn-sm">Saída</a>
-                        <a href="/api/estoque/editarEstoque/{{ item.id }}" class="btn btn-info btn-sm">Editar</a>
+                        <a href="/api/estoque/editarEstoque/{{ item.id }}" class="btn btn-info btn-sm text-white">Editar</a>
                         <a href="/api/estoque/excluirEstoque/{{ item.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="6" class="text-center">Nenhum item cadastrado no estoque.</td>
+                    <td colspan="7" class="text-center">Nenhum item cadastrado no estoque.</td>
                 </tr>
                 {% endfor %}
             </tbody>

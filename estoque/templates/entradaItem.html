@@ -7,26 +7,59 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="/api/estoque/">Sistema de Estoque</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/estoque/">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/estoque/itens">Estoque</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api/estoque/gerenciar-itens">Gerenciar Itens</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="container mt-4">
         <h1>Registrar Entrada de Item</h1>
-        <div class="card mb-3">
+        
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                Informações do Item
+            </div>
             <div class="card-body">
                 <h5 class="card-title">{{ estoque.item.nome }}</h5>
                 <p class="card-text">{{ estoque.item.descricao }}</p>
-                <p class="card-text">Quantidade atual: {{ estoque.quantidade }}</p>
-                <p class="card-text">Endereço: {{ estoque.endereco }}</p>
+                <p class="card-text"><strong>Quantidade atual:</strong> {{ estoque.quantidade }}</p>
+                <p class="card-text"><strong>Endereço:</strong> {{ estoque.endereco }}</p>
             </div>
         </div>
         
-        <form method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="quantidade" class="form-label">Quantidade para entrada:</label>
-                <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" required>
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                Registrar Entrada
             </div>
-            <button type="submit" class="btn btn-success">Registrar Entrada</button>
-            <a href="/api/estoque/itens" class="btn btn-secondary">Cancelar</a>
-        </form>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="quantidade" class="form-label">Quantidade para entrada:</label>
+                        <input type="number" class="form-control" id="quantidade" name="quantidade" min="1" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Registrar Entrada</button>
+                    <a href="/api/estoque/itens" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
