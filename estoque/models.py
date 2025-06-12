@@ -15,6 +15,7 @@ class Item(models.Model):
 class Estoque(models.Model):
     quantidade = models.IntegerField()
     endereco = models.CharField(max_length=50)
+    dt_ultima_entrada = models.DateTimeField(auto_now_add=True, null=True)
     item = models.ForeignKey(Item, on_delete=models.CASCADE, default=False)
 
     def __str__(self):

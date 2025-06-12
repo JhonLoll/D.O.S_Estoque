@@ -37,9 +37,10 @@
             <thead class="table-dark">
                 <tr>
                     <th>ID</th>
+                    <th>SKU</th>
                     <th>Item</th>
                     <th>Marca</th>
-                    <th>Unidade</th>
+                    <th>Preco</th>
                     <th>Quantidade</th>
                     <th>Endereço</th>
                     <th>Ações</th>
@@ -49,9 +50,10 @@
                 {% for item in estoque %}
                 <tr>
                     <td>{{ item.id }}</td>
+                    <td>{{ item.item.sku }}</td>
                     <td>{{ item.item.nome }}</td>
                     <td>{{ item.item.marca }}</td>
-                    <td>{{ item.item.unid_medida }}</td>
+                    <td>{{ item.item.preco }}</td>
                     <td>{{ item.quantidade }}</td>
                     <td>{{ item.endereco }}</td>
                     <td>
