@@ -4,8 +4,10 @@ from django.db import models
 
 class Item(models.Model):
     nome = models.CharField(max_length=100)
+    descricao = models.TextField(blank=True)
+    preco = models.DecimalField(max_digits=10, decimal_places=2)
     marca = models.CharField(max_length=50)
-    unid_medida = models.CharField(max_length=100)
+    sku = models.CharField(max_length=16)
 
     def __str__(self):
         return self.nome
