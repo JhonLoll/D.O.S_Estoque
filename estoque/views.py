@@ -2,8 +2,14 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import Item, Estoque
 
-# Create your views here.
+# API Views
+from rest_framework import viewsets, permissions
+from .serializers import EstoqueSerializer
 
+class EstoqueViewSet(viewsets.ModelViewSet):
+    queryset = Estoque.objects.all()
+    serializer_class = EstoqueSerializer
+    permission_classes = [permissions.AllowAny]
 
 # estoque\urls.py - index.html
 def index(request):

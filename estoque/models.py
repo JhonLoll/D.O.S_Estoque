@@ -13,11 +13,11 @@ class Item(models.Model):
         return self.nome
 
 class Estoque(models.Model):
+    id_item = models.UUIDField(null=True)
     quantidade = models.IntegerField()
     endereco = models.CharField(max_length=50)
     dt_ultima_entrada = models.DateTimeField(auto_now_add=True, null=True)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, default=False)
+    # item = models.ForeignKey(Item, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.endereco
-

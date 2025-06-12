@@ -1,7 +1,15 @@
 from django.urls import path
 from . import views
-from estoque.views import index
+from estoque.views import EstoqueViewSet, index
+from rest_framework.routers import DefaultRouter
+from .models import Estoque
 
+
+router = DefaultRouter(
+    trailing_slash=False
+)
+
+router.register(r'estoque', EstoqueViewSet)
 
 urlpatterns = [
     path('', index, name='index'),
@@ -16,3 +24,5 @@ urlpatterns = [
     path('gerenciar-itens', views.listarCadastrarItem, name='gerenciar_itens'),
     path('excluirItem/<int:id>', views.excluirItem, name='excluir_item'),
 ]
+
+urlpatterns += router.urls
