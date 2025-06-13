@@ -3,11 +3,12 @@ from django.http import HttpResponseRedirect
 import requests # Adicionar import
 from .models import Estoque
 
-API_PRODUTOS_URL = 'https://aramesinho.pythonanywhere.com/api/produtos/'
-
 # API Views
 from rest_framework import viewsets, permissions
 from .serializers import EstoqueSerializer
+
+API_PRODUTOS_URL = 'https://aramesinho.pythonanywhere.com/api/produtos/'
+
 
 class EstoqueViewSet(viewsets.ModelViewSet):
     queryset = Estoque.objects.all()
