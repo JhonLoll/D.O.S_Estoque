@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 from estoque.views import EstoqueViewSet, index
 from rest_framework.routers import DefaultRouter
-from .models import Estoque
+# from .models import Estoque
 
 
 router = DefaultRouter(

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-import requests # Adicionar import
+import requests
 from .models import Estoque
 
 # API Views
