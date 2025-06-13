@@ -37,15 +37,15 @@
                 Formulário de {% if estoque %}Edição{% else %}Cadastro{% endif %}
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="{% url "novo_estoque" %}">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="item" class="form-label">Item:</label>
-                        <select class="form-select" id="item" name="item" required>
+                        <select class="form-select" id="item" name="id_item" required>
                             <option value="">Selecione um item</option>
-                            {% for item in itens %}
-                                <option value="{{ item.id }}" {% if estoque and estoque.item.id == item.id %}selected{% endif %}>
-                                    {{ item.nome }} - {{ item.marca }} ({{ item.unid_medida }})
+                            {% for item in itens_api %}
+                                <option value="{{ item.id }}" {% if estoque and estoque.id_item == item.id %}selected{% endif %}>
+                                    {{ item.nome }} - {{ item.marca }}
                                 </option>
                             {% endfor %}
                         </select>

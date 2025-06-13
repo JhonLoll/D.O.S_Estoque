@@ -36,36 +36,34 @@
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
-                    <th>ID</th>
-                    <th>SKU</th>
-                    <th>Item</th>
+                    <th>ID Estoque</th>
+                    <th>Nome do Item</th>
+                    <th>Descrição</th>
                     <th>Marca</th>
-                    <th>Preco</th>
+                    <th>Preço</th>
                     <th>Quantidade</th>
                     <th>Endereço</th>
                     <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in estoque %}
+                {% for data_row in estoque_data %}
                 <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.item.sku }}</td>
-                    <td>{{ item.item.nome }}</td>
-                    <td>{{ item.item.marca }}</td>
-                    <td>{{ item.item.preco }}</td>
-                    <td>{{ item.quantidade }}</td>
-                    <td>{{ item.endereco }}</td>
+                    <td>{{ data_row.estoque.id }}</td>
+                    <td>{% if data_row.item_info %}{{ data_row.item_info.nome }}{% else %}Item não associado ou não encontrado{% endif %}</td>
+                    <td>{% if data_row.item_info %}{{ data_row.item_info.descricao|default_if_none:"" }}{% else %}-{% endif %}</td>
+                    <td>{% if data_row.item_info %}{{ data_row.item_info.marca|default_if_none:"" }}{% else %}-{% endif %}</td>
+                    <td>{% if data_row.item_info %}{{ data_row.item_info.preco|default_if_none:"-" }}{% else %}-{% endif %}</td>
+                    <td>{{ data_row.estoque.quantidade }}</td>
+                    <td>{{ data_row.estoque.endereco }}</td>
                     <td>
-                        <a href="/api/estoque/entradaitem/{{ item.id }}" class="btn btn-success btn-sm">Entrada</a>
-                        <a href="/api/estoque/saidaitem/{{ item.id }}" class="btn btn-warning btn-sm">Saída</a>
-                        <a href="/api/estoque/editarEstoque/{{ item.id }}" class="btn btn-info btn-sm text-white">Editar</a>
-                        <a href="/api/estoque/excluirEstoque/{{ item.id }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este item?')">Excluir</a>
+                        <a href="{% url 'editar_estoque' data_row.estoque.id %}" class="btn btn-info btn-sm text-white">Editar</a>
+                        <a href="{% url 'excluir_estoque' data_row.estoque.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este item do estoque?')">Excluir</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="7" class="text-center">Nenhum item cadastrado no estoque.</td>
+                    <td colspan="8" class="text-center">Nenhum item cadastrado no estoque.</td>
                 </tr>
                 {% endfor %}
             </tbody>

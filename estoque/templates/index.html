@@ -32,9 +32,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/api/estoque/itens">Estoque</a>
                     </li>
-                    <li class="nav-item">
+                    {% comment %} <li class="nav-item">
                         <a class="nav-link" href="/api/estoque/gerenciar-itens">Gerenciar Itens</a>
-                    </li>
+                    </li> {% endcomment %}
                 </ul>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <hr class="my-4">
             <p>Utilize as opções abaixo para navegar pelo sistema.</p>
             <a class="btn btn-primary" href="/api/estoque/itens">Ver Estoque</a>
-            <a class="btn btn-success" href="/api/estoque/gerenciar-itens">Gerenciar Itens</a>
+            {% comment %} <a class="btn btn-success" href="/api/estoque/gerenciar-itens">Gerenciar Itens</a> {% endcomment %}
             <a class="btn btn-info text-white" href="/api/estoque/novoEstoque">Adicionar ao Estoque</a>
         </div>
     </div>
